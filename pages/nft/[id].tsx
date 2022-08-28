@@ -32,18 +32,19 @@ function NFTDropPage({ collection }: Props) {
   // NftDrop
   const nftDrop = useNFTDrop(collection.address);
 
+  const fetchNftDropData = useCallback(async () => {
+    if (!nftDrop) return;
+    setLoading(true);
+    const claimed = await nftDrop.getAllClaimed();
+    const total = await nftDrop.totalSupply();
+
+    setClaimedSupply(claimed?.length);
+    setTotalSupply(total);
+    setLoading(false);
+  }, [nftDrop]);
+
   useEffect(() => {
     if (!nftDrop) return;
-
-    const fetchNftDropData = async () => {
-      setLoading(true);
-      const claimed = await nftDrop.getAllClaimed();
-      const total = await nftDrop.totalSupply();
-
-      setClaimedSupply(claimed?.length);
-      setTotalSupply(total);
-      setLoading(false);
-    };
 
     const fetchPrice = async () => {
       const claimConditions = await nftDrop.claimConditions.getAll();
@@ -85,6 +86,7 @@ function NFTDropPage({ collection }: Props) {
             fontSize: "17px",
           },
         });
+        fetchNftDropData();
       })
       .catch((error) => {
         console.error(error);
@@ -249,8 +251,6 @@ export const getServerSideProps: GetServerSideProps = async ({
       notFound: true,
     };
   }
-
-  console.log(collection);
 
   return {
     props: { collection },
