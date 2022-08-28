@@ -48,6 +48,14 @@ export default {
       },
     },
     {
+      name: 'previewImage',
+      title: 'preview image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
