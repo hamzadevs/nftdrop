@@ -1,5 +1,5 @@
 import React from "react";
-import GetServerSideProps from "next";
+import type { GetServerSideProps } from "next";
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
 import { sanityClient, urlFor } from "../../sanity";
 import { Collection } from "../../typings";

@@ -2,7 +2,6 @@ import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { sanityClient, urlFor } from "../sanity";
-import styles from "../styles/Home.module.css";
 import { Collection } from "../typings";
 
 interface Props {
